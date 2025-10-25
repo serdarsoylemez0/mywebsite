@@ -13,21 +13,21 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'John Doe - Senior Software Engineer',
+  title: 'Serdar Soylemez - Software Engineer',
   description: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
   keywords: ['software engineer', 'portfolio', 'web development', 'react', 'typescript'],
-  authors: [{ name: 'John Doe' }],
+  authors: [{ name: 'Serdar Soylemez' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://yourwebsite.com',
-    title: 'John Doe - Senior Software Engineer',
+    url: 'https://serdarsoylemez.com',
+    title: 'Serdar Soylemez - Software Engineer',
     description: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
-    siteName: 'John Doe Portfolio',
+    siteName: 'Serdar Soylemez Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'John Doe - Senior Software Engineer',
+    title: 'Serdar Soylemez - Software Engineer',
     description: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
   },
 }
