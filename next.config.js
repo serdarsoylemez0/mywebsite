@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // Vercel build sırasında ESLint hatalarını yoksay
+    // Build sırasında ESLint hatalarını yok say
     ignoreDuringBuilds: true,
   },
 };
