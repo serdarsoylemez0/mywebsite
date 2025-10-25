@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
   keywords: ['software engineer', 'portfolio', 'web development', 'react', 'typescript'],
   authors: [{ name: 'Serdar Soylemez' }],
+  icons: {
+    icon: '/icon',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
