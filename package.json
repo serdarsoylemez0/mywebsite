@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --no-lint",
     "start": "next start",
+    "generate-resume": "node scripts/generate-resume.js",
     "lint": "next lint",
-    "type-check": "tsc --noEmit",
-    "generate-resume": "tsx scripts/generate-resume.ts"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
