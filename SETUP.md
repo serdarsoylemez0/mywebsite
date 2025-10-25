@@ -13,7 +13,7 @@ Open `src/config/site.ts` and update the following:
 ```typescript
 name: 'Serdar Soylemez',
 title: 'Software Engineer',
-tagline: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
+tagline: 'I design and build beautiful, fast, and accessible software for everyone.',
 ```
 
 ### Step 2: Update Contact Information

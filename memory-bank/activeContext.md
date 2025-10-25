@@ -1,34 +1,36 @@
 # Active Context
 
 ## Current Focus
-Portfolio website is complete with professional design enhancements and centralized configuration system.
+Portfolio website with functional contact form using EmailJS integration.
 
-## Recent Changes (Latest Session)
-- ✅ Created centralized configuration system (`src/config/site.ts`)
-- ✅ Enhanced all components to use config data
-- ✅ Applied professional design patterns across all pages
-- ✅ Added modern animations and transitions (fade-in-up, stagger, hover effects)
-- ✅ Implemented glassmorphism navigation with sticky header and active states
-- ✅ Enhanced hero section with gradient backgrounds and animated badges
-- ✅ Redesigned project cards with hover effects and tech stack tags
-- ✅ Improved About page with profile photo effects and social buttons
-- ✅ Added green availability badge with glow effects and emoji
-- ✅ Enhanced logo/brand with rotation animation, glow, and subtitle
-- ✅ Made contact cards fully interactive (clickable links)
-- ✅ Added copy-to-clipboard functionality for email
-- ✅ Updated memory bank documentation
+## Recent Changes (Latest Session - Oct 25, 2025)
+- ✅ Implemented EmailJS contact form functionality
+- ✅ Installed @emailjs/browser SDK
+- ✅ Added form state management with React hooks (useState, useRef)
+- ✅ Implemented async email sending with loading states
+- ✅ Added form validation (required fields, email format, min length)
+- ✅ Created success/error feedback messages with styled alerts
+- ✅ Added disabled states during form submission
+- ✅ Implemented form reset after successful submission
+- ✅ Created .env.local configuration for EmailJS credentials
+- ✅ Added console logging for debugging
+- ✅ Created EMAILJS_SETUP.md and CONTACT_FORM_DEBUG.md guides
+- ✅ Updated site tagline from "web experiences" to "software"
+- ✅ Dev server running on port 3002 with environment variables loaded
 
 ## Completed Features
 1. ✅ Home page with hero and project preview
 2. ✅ About page with profile, skills, experience, education
 3. ✅ Projects page with project grid
-4. ✅ Contact page with form and social links
+4. ✅ Contact page with functional EmailJS form
 5. ✅ Project detail pages (dynamic routes)
 6. ✅ Dark/light theme toggle
 7. ✅ Responsive navigation
 8. ✅ Centralized site configuration
 9. ✅ Professional animations and transitions
 10. ✅ Modern UI/UX design patterns
+11. ✅ Email integration with EmailJS (client-side)
+12. ✅ Form validation and user feedback
 
 ## Active Decisions
 - **Framework**: Next.js 14 App Router with TypeScript
@@ -39,6 +41,8 @@ Portfolio website is complete with professional design enhancements and centrali
 - **Design**: Professional UI/UX with gradients, animations, glassmorphism
 - **Colors**: Primary (#1173d4), Green for status, gradients for accents
 - **Interactions**: Hover effects, smooth transitions, copy-to-clipboard
+- **Email Service**: EmailJS for client-side email sending (no backend needed)
+- **Environment**: .env.local for EmailJS credentials (gitignored)
 
 ## Important Patterns
 - **Configuration**: All content from `siteConfig` - single source of truth
@@ -59,3 +63,8 @@ Portfolio website is complete with professional design enhancements and centrali
 - **Two-button approach** (mailto + copy) covers all user scenarios
 - **Memory bank** provides perfect continuity across sessions
 - **User customization** was key - made it their own with real data
+- **EmailJS** perfect for static sites - no backend needed, free tier sufficient
+- **Environment variables** must be prefixed with NEXT_PUBLIC_ for client-side access
+- **Dev server restart** required after creating/updating .env.local
+- **Template field names** in EmailJS must match form field names exactly
+- **Console logging** crucial for debugging EmailJS integration issues

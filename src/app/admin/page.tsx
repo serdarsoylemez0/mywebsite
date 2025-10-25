@@ -183,22 +183,6 @@ export default function AdminPanel() {
 
               <div>
                 <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Phone (Optional)
-                </label>
-                <input
-                  type="tel"
-                  value={config.contact.phone || ''}
-                  onChange={(e) => setConfig({ 
-                    ...config, 
-                    contact: { ...config.contact, phone: e.target.value }
-                  })}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#0a0f16] text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="+1 (555) 123-4567"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                   Location (Optional)
                 </label>
                 <input

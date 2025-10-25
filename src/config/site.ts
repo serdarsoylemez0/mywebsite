@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig
 export const siteConfig = {
   "name": "Serdar Soylemez",
   "title": "Software Engineer",
-  "tagline": "I design and build beautiful, fast, and accessible web experiences for everyone.",
+  "tagline": "ssI design and build beautiful, fast, and accessible softwares for everyone.",
   "bio": "Software engineering with experience in software development, algorithms, and databases. Worked on UAV autonomy and system integration using ROS2, Python, and C++. Interested in cybersecurity, system efficiency, and human–AI interaction through prompt engineering and vibe coding. Curious, adaptable, and comfortable moving between technical and creative work.",
   "stats": {
     "experience": "4+",

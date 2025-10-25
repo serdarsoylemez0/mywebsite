@@ -1,13 +1,84 @@
 'use client'
 
+import { useState, useRef } from 'react'
+import emailjs from '@emailjs/browser'
 import { siteConfig } from '@/config/site'
 import { Footer } from '@/components/footer'
 
+interface FormData {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
 export default function ContactPage() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const formRef = useRef<HTMLFormElement>(null)
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    subject: 'Job Opportunity',
+    message: ''
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error' | null
+    message: string
+  }>({ type: null, message: '' })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted')
+    setIsLoading(true)
+    setStatus({ type: null, message: '' })
+
+    try {
+      // EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID'
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID'
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY'
+
+      console.log('EmailJS Config:', { serviceId, templateId, publicKey })
+      console.log('Form Data:', formData)
+
+      if (!formRef.current) {
+        throw new Error('Form reference not found')
+      }
+
+      await emailjs.sendForm(
+        serviceId,
+        templateId,
+        formRef.current,
+        publicKey
+      )
+      
+      console.log('Email sent successfully!')
+
+      setStatus({
+        type: 'success',
+        message: '✅ Message sent successfully! I\'ll get back to you soon.'
+      })
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        subject: 'Job Opportunity',
+        message: ''
+      })
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      setStatus({
+        type: 'error',
+        message: '❌ Failed to send message. Please try again or email me directly.'
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const copyEmail = (e: React.MouseEvent) => {
@@ -132,34 +203,64 @@ export default function ContactPage() {
           <h2 className="text-gray-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3">
             Send a Message
           </h2>
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
+            {/* Status Message */}
+            {status.type && (
+              <div
+                className={`p-4 rounded-xl border ${
+                  status.type === 'success'
+                    ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200'
+                    : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200'
+                }`}
+              >
+                <p className="text-sm font-medium">{status.message}</p>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <label className="flex flex-col">
                 <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
-                  Full Name
+                  Full Name <span className="text-red-500">*</span>
                 </p>
                 <input
-                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] h-14 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  disabled={isLoading}
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] h-14 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Your Name"
                 />
               </label>
               <label className="flex flex-col">
                 <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
-                  Email Address
+                  Email Address <span className="text-red-500">*</span>
                 </p>
                 <input
-                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] h-14 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal"
-                  placeholder="you@example.com"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   type="email"
+                  required
+                  disabled={isLoading}
+                  className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] h-14 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal disabled:opacity-50 disabled:cursor-not-allowed"
+                  placeholder="you@example.com"
                 />
               </label>
             </div>
             <div>
               <label className="flex flex-col">
                 <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
-                  Subject
+                  Subject <span className="text-red-500">*</span>
                 </p>
-                <select className="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] h-14 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal">
+                <select
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  disabled={isLoading}
+                  className="form-select flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] h-14 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   <option>Job Opportunity</option>
                   <option>Collaboration</option>
                   <option>General Question</option>
@@ -169,10 +270,16 @@ export default function ContactPage() {
             <div>
               <label className="flex flex-col">
                 <p className="text-gray-900 dark:text-white text-base font-medium leading-normal pb-2">
-                  Your Message
+                  Your Message <span className="text-red-500">*</span>
                 </p>
                 <textarea
-                  className="form-textarea flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] min-h-32 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  disabled={isLoading}
+                  minLength={10}
+                  className="form-textarea flex w-full min-w-0 flex-1 resize-y overflow-hidden rounded-xl text-gray-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-gray-300 dark:border-[#3b4754] bg-white dark:bg-[#1c2127] min-h-32 placeholder:text-gray-400 dark:placeholder:text-[#9dabb9] p-[15px] text-base font-normal leading-normal disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Hi Serdar, I'd like to discuss..."
                 ></textarea>
               </label>
@@ -180,9 +287,12 @@ export default function ContactPage() {
             <div className="flex justify-end">
               <button
                 type="submit"
-                className="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+                disabled={isLoading}
+                className="flex min-w-[120px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span className="truncate">Send Message</span>
+                <span className="truncate">
+                  {isLoading ? 'Sending...' : 'Send Message'}
+                </span>
               </button>
             </div>
           </form>
