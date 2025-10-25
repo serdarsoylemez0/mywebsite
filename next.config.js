@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // Warning: Dikkat! Bu, build sırasında ESLint hatalarını yok sayar.
+    // Build sırasında ESLint hatalarını yok say
     ignoreDuringBuilds: true,
   },
 };
