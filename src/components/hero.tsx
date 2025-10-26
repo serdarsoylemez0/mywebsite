@@ -1,84 +1,76 @@
 import { siteConfig } from '@/config/site'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export function Hero() {
   return (
     <div className="relative py-20 sm:py-32 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-blue-500/5 dark:from-primary/10 dark:to-blue-500/10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-primary/5 to-cyan-500/10 dark:from-blue-500/20 dark:via-primary/10 dark:to-cyan-500/20" />
       
       {/* Animated background shapes */}
-      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-700" />
+      <div className="absolute top-20 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-700" />
       
-      <div className="relative flex flex-col gap-8 px-4 text-center">
-        {/* Badge */}
-        <div className="animate-fade-in-up flex justify-center">
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/50 dark:to-emerald-950/50 border-2 border-green-200 dark:border-green-800 shadow-lg shadow-green-500/20 hover:shadow-xl hover:shadow-green-500/30 transition-all duration-300 hover:scale-105">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 shadow-lg shadow-green-500/50"></span>
-            </span>
-            <span className="text-sm font-bold text-green-700 dark:text-green-400 tracking-wide">✨ Available for opportunities</span>
-          </div>
-        </div>
-        
-        {/* Main heading */}
-        <div className="flex flex-col gap-4 animate-fade-in-up stagger-1">
-          <h1 className="text-gray-900 dark:text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-[-0.033em]">
-            <span className="block">{siteConfig.name}</span>
-            <span className="block mt-2 bg-gradient-to-r from-primary via-blue-600 to-primary bg-clip-text text-transparent animate-gradient">
-              {siteConfig.title}
-            </span>
-          </h1>
-          <h2 className="text-gray-600 dark:text-gray-400 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-            {siteConfig.tagline}
-          </h2>
-        </div>
-        
-        {/* Stats cards - Redesigned with 2 cards */}
-        <div className="flex flex-wrap gap-8 justify-center pt-8 max-w-3xl mx-auto animate-fade-in-up stagger-2">
-          <div className="group relative flex min-w-[220px] flex-1 flex-col gap-4 rounded-3xl p-8 bg-gradient-to-br from-white to-gray-50 dark:from-[#1a242f] dark:to-[#151d27] border-2 border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:border-primary/50">
-            {/* Glow effect */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-blue-500/5 transition-all duration-500" />
-            
-            <div className="relative flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-2xl bg-gradient-to-br from-primary/20 to-blue-500/20 group-hover:from-primary/30 group-hover:to-blue-500/30 transition-all duration-300 group-hover:scale-110">
-                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-900 dark:text-white text-5xl font-black leading-tight bg-gradient-to-br from-primary via-blue-600 to-primary bg-clip-text text-transparent">
-                    {siteConfig.stats.experience}
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mt-1">Years</p>
-                </div>
-              </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          {/* Left side - Content */}
+          <div className="flex-1 text-left space-y-8 animate-fade-in-up">
+            <div className="space-y-4">
+              <h1 className="text-gray-900 dark:text-white text-5xl sm:text-6xl md:text-7xl font-black leading-tight">
+                Hello!
+              </h1>
+              <h2 className="text-gray-900 dark:text-white text-4xl sm:text-5xl md:text-6xl font-black leading-tight">
+                I'm <span className="bg-gradient-to-r from-primary to-blue-600 dark:from-primary dark:to-blue-400 bg-clip-text text-transparent">Serdar</span>
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 text-xl sm:text-2xl max-w-2xl leading-relaxed">
+                A passionate software engineer from Istanbul, Turkey.
+              </p>
             </div>
-            <p className="relative text-gray-700 dark:text-gray-300 text-base font-bold">Experience</p>
+            
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <Link 
+                href="/about"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                About
+              </Link>
+              
+              <a 
+                href={siteConfig.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white font-bold text-lg border-2 border-gray-200 dark:border-gray-700 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                </svg>
+                GitHub
+              </a>
+            </div>
           </div>
           
-          <div className="group relative flex min-w-[220px] flex-1 flex-col gap-4 rounded-3xl p-8 bg-gradient-to-br from-white to-gray-50 dark:from-[#1a242f] dark:to-[#151d27] border-2 border-gray-200 dark:border-gray-700 shadow-xl hover:shadow-2xl hover:shadow-primary/30 transition-all duration-500 hover:-translate-y-3 hover:border-primary/50">
-            {/* Glow effect */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-blue-500/5 transition-all duration-500" />
-            
-            <div className="relative flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="p-3 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-500/20 group-hover:from-green-500/30 group-hover:to-emerald-500/30 transition-all duration-300 group-hover:scale-110">
-                  <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-gray-900 dark:text-white text-5xl font-black leading-tight bg-gradient-to-br from-green-600 via-emerald-600 to-green-600 dark:from-green-400 dark:via-emerald-400 dark:to-green-400 bg-clip-text text-transparent">
-                    {siteConfig.stats.projects}
-                  </p>
-                  <p className="text-gray-500 dark:text-gray-400 text-xs font-bold uppercase tracking-wider mt-1">Completed</p>
+          {/* Right side - Profile Image */}
+          <div className="flex-shrink-0 animate-fade-in-up stagger-1">
+            <div className="relative w-80 h-80 sm:w-96 sm:h-96">
+              {/* Hexagon shape container */}
+              <div className="relative w-full h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-blue-500 rounded-3xl rotate-45 transform scale-90 opacity-20 blur-2xl"></div>
+                <div className="relative w-full h-full rounded-3xl overflow-hidden border-4 border-primary/30 dark:border-primary/40 shadow-2xl shadow-primary/20 hover:scale-105 hover:shadow-primary/30 transition-all duration-500">
+                  <Image
+                    src="/mainphoto.jpg"
+                    alt={siteConfig.name}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
               </div>
             </div>
-            <p className="relative text-gray-700 dark:text-gray-300 text-base font-bold">Projects</p>
           </div>
         </div>
       </div>
