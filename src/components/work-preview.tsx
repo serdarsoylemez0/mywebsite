@@ -1,30 +1,8 @@
 import Link from 'next/link'
+import { fetchGitHubRepos } from '@/lib/github'
 
-const projects = [
-  {
-    id: 'project-a',
-    title: 'Project A',
-    description: 'A web application that helps users manage their finances.',
-    tech: 'React, Node.js, PostgreSQL',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
-  },
-  {
-    id: 'project-b',
-    title: 'Project B',
-    description: 'A mobile app that connects people with local services.',
-    tech: 'React Native, Firebase',
-    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=450&fit=crop',
-  },
-  {
-    id: 'project-c',
-    title: 'Project C',
-    description: 'A complex backend system for a large e-commerce platform.',
-    tech: 'Go, Kafka, Kubernetes',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=450&fit=crop',
-  },
-]
-
-export function WorkPreview() {
+export async function WorkPreview() {
+  const projects = await fetchGitHubRepos()
   return (
     <div className="relative py-20 sm:py-32 overflow-hidden">
       {/* Background decoration */}
@@ -38,18 +16,20 @@ export function WorkPreview() {
             </span>
           </div>
           <h2 className="text-gray-900 dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.015em] mb-4">
-            My Projects
+            My GitHub Projects
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Here's a selection of projects that showcase my skills in creating high-quality digital products.
+            Explore my latest open-source contributions and personal projects from GitHub.
           </p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
-            <Link 
+            <a 
               key={project.id} 
-              href={`/work/${project.id}`} 
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex flex-col gap-5 bg-white dark:bg-[#1a242f] rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-lg hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-2 animate-fade-in-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -69,9 +49,19 @@ export function WorkPreview() {
               </div>
               
               <div className="px-6 pb-6 flex flex-col gap-3">
-                <h3 className="text-gray-900 dark:text-white text-xl font-bold leading-tight group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-gray-900 dark:text-white text-xl font-bold leading-tight group-hover:text-primary transition-colors flex-1">
+                    {project.title}
+                  </h3>
+                  {project.stars > 0 && (
+                    <div className="flex items-center gap-1 text-yellow-500">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </svg>
+                      <span className="text-xs font-semibold">{project.stars}</span>
+                    </div>
+                  )}
+                </div>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-2">
                   {project.description}
                 </p>
@@ -86,7 +76,7 @@ export function WorkPreview() {
                   ))}
                 </div>
               </div>
-            </Link>
+            </a>
           ))}
         </div>
         

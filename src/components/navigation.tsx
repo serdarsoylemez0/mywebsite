@@ -10,7 +10,6 @@ const navItems = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
-  { href: '/contact', label: 'Contact' },
   // Admin is hidden - access directly at /admin
 ]
 
