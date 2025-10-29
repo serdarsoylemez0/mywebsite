@@ -37,7 +37,6 @@ export async function fetchGitHubRepos(): Promise<Project[]> {
           'Accept': 'application/vnd.github.v3+json',
         },
         next: { revalidate: 3600 }, // Cache for 1 hour
-        cache: 'no-store' // Disable cache for debugging
       }
     )
 
