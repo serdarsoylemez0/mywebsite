@@ -4,7 +4,7 @@ export const siteConfig = {
   "name": "Serdar Soylemez",
   "title": "Software Engineer",
   "tagline": "I design and build beautiful, fast, and accessible softwares for everyone.",
-  "bio": "Software engineering with experience in software development, algorithms, and databases. Worked on UAV autonomy and system integration using ROS2, Python, and C++. Interested in cybersecurity, system efficiency, and human–AI interaction through prompt engineering and vibe coding. Curious, adaptable, and comfortable moving between technical and creative work.",
+  "bio": "Software engineering student focused on software development, algorithm design, and database systems. Worked on software development and system integration projects in academic settings, focusing on autonomous systems. Explored and practiced areas of network security and threat analysis. Worked on system optimization and coordination in international project teams.",
   "stats": {
     "experience": "4+",
     "projects": "5+"
