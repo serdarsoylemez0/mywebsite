@@ -6,6 +6,7 @@ import { Navigation } from '@/components/navigation'
 import { VinylPlayer } from '@/components/vinyl-player'
 import { AnalyticsTracker } from '@/components/analytics-tracker'
 import { SplashWrapper } from '@/components/splash-wrapper'
+import { siteConfig } from '@/config/site'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -14,25 +15,58 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Serdar Soylemez - Software Engineer',
-  description: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
-  keywords: ['software engineer', 'portfolio', 'web development', 'react', 'typescript'],
-  authors: [{ name: 'Serdar Soylemez' }],
+  metadataBase: new URL(siteConfig.social.website),
+  title: {
+    default: siteConfig.seo.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.seo.description,
+  keywords: siteConfig.seo.keywords,
+  authors: [{ name: siteConfig.name, url: siteConfig.social.website }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/icon',
+    shortcut: '/icon',
+    apple: '/icon',
   },
+  manifest: '/manifest.json',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://serdarsoylemez.com',
-    title: 'Serdar Soylemez - Software Engineer',
-    description: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
-    siteName: 'Serdar Soylemez Portfolio',
+    url: siteConfig.social.website,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: '/profile.jpg',
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Serdar Soylemez - Software Engineer',
-    description: 'I design and build beautiful, fast, and accessible web experiences for everyone.',
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
+    creator: '@serdarsoylemez',
+    images: ['/profile.jpg'],
+  },
+  verification: {
+    google: 'google-site-verification-code',
   },
 }
 

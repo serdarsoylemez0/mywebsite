@@ -2,18 +2,18 @@ import { ImageResponse } from 'next/og'
 
 // Image metadata
 export const size = {
-  width: 32,
-  height: 32,
+  width: 180,
+  height: 180,
 }
 export const contentType = 'image/png'
 
 // Image generation
-export default function Icon() {
+export default function AppleIcon() {
   return new ImageResponse(
     (
       <div
         style={{
-          fontSize: 20,
+          fontSize: 96,
           background: '#000000',
           width: '100%',
           height: '100%',
