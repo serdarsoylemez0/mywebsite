@@ -14,7 +14,7 @@ export function SplashScreen({ onComplete }: SplashScreenProps) {
     // Show skip button after 5 seconds
     const timer = setTimeout(() => {
       setShowSkip(true)
-    }, 5000)
+    }, 3000)
 
     return () => clearTimeout(timer)
   }, [])
